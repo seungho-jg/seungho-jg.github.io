@@ -3,22 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Blog</title>
+    <title>Blog</title>
     <link href="./css/output.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
     <header class="bg-blue-600 text-white p-4">
-        <h1 class="text-2xl font-bold">My GitHub Blog</h1>
+        <h1 class="text-2xl font-bold">Blog</h1>
     </header>
 
     <main class="container mx-auto mt-4 p-4">
-        <!-- Content will go here -->
+        <div id="count">0</div>
+        <button id="btn" class="rounded-sm bg-slate-400 p-2">+</button>
+        <div id="chessboard" class="grid grid-cols-8 gap-0 bg-white shadow-lg"></div>
     </main>
 
-    <footer class="bg-blue-600 text-white p-4 mt-4">
-        <p>&copy; 2024 My GitHub Blog</p>
-    </footer>
-
     <script src="./js/main.js"></script>
+    <script>
+        const chessboard = document.querySelector('#chessboard');
+        const pieces = {
+            'r': '♜', 'n': '♞', 'b': '♝', 'q': '♛', 'k': '♚', 'p': '♟',
+            'R': '♖', 'N': '♘', 'B': '♗', 'Q': '♕', 'K': '♔', 'P': '♙'
+        };
+        const initialBoard = [
+            ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
+            ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+            Array(8).fill(''),
+            Array(8).fill(''),
+            Array(8).fill(''),
+            Array(8).fill(''),
+            ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+            ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
+        ];
+
+        function createChessboard() {
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    square.className = `flex items-center justify-center text-4xl w-32 h-32
+                        ${(row + col) % 2 === 0 ? 'bg-yellow-200' : 'bg-green-700 text-white'}`;
+                    square.dataset.row = row;
+                    square.dataset.col = col;
+                    square.textContent = pieces[initialBoard[row][col]] || '';
+                    square.addEventListener('click', handleSquareClick);
+                    chessboard.appendChild(square);
+                }
+            }
+        }
+        let selectedPiece = null;
+
+        function handleSquareClick(event) {
+            const clickedSquare = event.target;
+            const row = parseInt(clickedSquare.dataset.row);
+            const col = parseInt(clickedSquare.dataset.col);
+
+            if (selectedPiece) {
+                // Move the piece
+                clickedSquare.textContent = selectedPiece.textContent;
+                selectedPiece.textContent = '';
+                selectedPiece.classList.remove('bg-blue-300');
+                selectedPiece = null;
+            } else if (clickedSquare.textContent) {
+                // Select the piece
+                selectedPiece = clickedSquare;
+                clickedSquare.classList.add('bg-blue-300');
+            }
+        }
+
+        createChessboard();
+    </script>
 </body>
 </html>
