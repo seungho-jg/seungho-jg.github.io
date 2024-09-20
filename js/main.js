@@ -9,14 +9,14 @@ async function loadNavbarAndInitialize() {
     document.getElementById('navbar').innerHTML = data;
     console.log(data)
 
-    await initializeNavbar();
+    initializeNavbar();
   } catch (error) {
     console.error('Failed to load or initialize navbar:', error);
   }
 }
 
 // navbar 초기화 함수
-async function initializeNavbar() {
+function initializeNavbar() {
   setupThemeToggle();
   setupMobileMenu();
 }
