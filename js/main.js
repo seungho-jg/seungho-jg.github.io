@@ -1,5 +1,10 @@
 // navbar를 로드하고 초기화하는 함수
 async function loadNavbarAndInitialize() {
+  const navbarContainer = document.getElementById('navbar');
+
+  // 플레이스홀더 추가
+  navbarContainer.innerHTML = '<div class="bg-gray-800 h-16 animate-pulse"></div>';
+
   try {
     const response = await fetch('/components/navbar.html');
     if (!response.ok) {
@@ -7,7 +12,6 @@ async function loadNavbarAndInitialize() {
     }
     const data = await response.text();
     document.getElementById('navbar').innerHTML = data;
-    console.log(data)
 
     initializeNavbar();
   } catch (error) {
