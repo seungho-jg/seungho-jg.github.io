@@ -7,7 +7,7 @@ let postsContainer;
 
 async function fetchPosts() {
     try {
-        const response = await fetch('https://seungho-jg.github.io/contents/posts/metadata.json');
+        const response = await fetch('https://seungho-jg.github.io/posts/metadata.json');
         if (!response.ok) throw new Error('Failed to fetch posts');
         posts = await response.json();
         allTags = [...new Set(posts.flatMap(post => post.tags))];
