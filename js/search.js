@@ -21,7 +21,7 @@ const posts = [
   // 키워드 버튼 렌더링
   function renderKeywordButtons() {
     keywordsContainer.innerHTML = allKeywords.map(keyword => 
-      `<button class="px-4 py-2 text-sm bg-slate-400 text-white rounded-full hover:bg-indigo-600 focus:outline-none" data-keyword="${keyword}">#${keyword}</button>`
+      `<button class="px-4 py-2 text-sm bg-stone-400 dark:bg-slate-400 text-white rounded-full hover:bg-indigo-400 dark:hover:bg-indigo-400 focus:outline-none" data-keyword="${keyword}">#${keyword}</button>`
     ).join('');
   
     // 키워드 버튼에 이벤트 리스너 추가
@@ -56,10 +56,10 @@ const posts = [
     : posts.filter(post => selectedKeywords.every(keyword => post.keywords.includes(keyword)));
     postingCounter.innerText =`총 ${filteredPosts.length}개의 게시물이 있어요`
     postsContainer.innerHTML = filteredPosts.map(post => `
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow">
+        <div class="bg-white dark:bg-gray-500 p-4 rounded shadow hover:translate-x-1 transition-transform duration-150">
         <h3 class="text-xl font-semibold">${post.title}</h3>
-        <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">${formatDate(post.date)}</p>
-        <p class="text-gray-600 dark:text-gray-300 mb-5">${post.content}</p>
+        <p class="text-gray-500 dark:text-gray-300 text-sm mb-2">${formatDate(post.date)}</p>
+        <p class="text-gray-600 dark:text-gray-50 mb-5">${post.content}</p>
         <div class="flex flex-wrap gap-2">
             ${post.keywords.map(keyword => 
               `<span class="px-2 py-1 bg-gray-200 text-gray-800 rounded text-sm">${keyword}</span>`
