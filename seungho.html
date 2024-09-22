@@ -112,17 +112,19 @@
                         body: JSON.stringify(postData),
                     });
                     
-                    if (response.ok) {
-                        alert('포스트가 성공적으로 생성되었습니다!');
+                const result = await response.json();
+                    
+                if (result.status === 'success') {
+                        alert(`포스트가 성공적으로 생성되었습니다!\n${result.details.monthly} 파일 생성/업데이트\n${result.details.metadata} 메타데이터 업데이트`);
                         postForm.reset();
                         simplemde.value(''); // 에디터 내용 초기화
                         localStorage.removeItem('markdownContent'); // 로컬 스토리지 내용 삭제
                     } else {
-                        throw new Error('포스트 생성 실패');
+                        throw new Error(result.message || '포스트 생성 실패');
                     }
                 } catch (error) {
                     console.error('Error:', error);
-                    alert('포스트 생성 중 오류가 발생했습니다.');
+                    alert(`포스트 생성 중 오류가 발생했습니다: ${error.message}`);
                 }
             });
         });
