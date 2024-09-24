@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
-  content: ["./*.html", "./js/*.js", "./components/*.html"],
+  content: ["./src/*.html", "./src/js/*.js", "./components/*.html"],
   theme: {
     extend: {},
   },
@@ -9,4 +9,3 @@ module.exports = {
     require('@tailwindcss/typography'),
   ],
 }
-

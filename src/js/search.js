@@ -58,7 +58,7 @@ function filterPosts() {
     postingCounter.innerText = `총 ${filteredPosts.length}개의 게시물이 있어요`;
     
     postsContainer.innerHTML = filteredPosts.map(post => `
-        <a href="post.html?id=${post.id}&ym=${post.date.substring(0, 4)}${post.date.substring(5, 7)}" >
+        <a href="post?id=${post.id}&ym=${post.date.substring(0, 4)}${post.date.substring(5, 7)}" >
         <div class="bg-white dark:bg-gray-500 p-4 rounded shadow hover:translate-x-1 transition-transform duration-150">
             <h3 class="text-xl font-semibold">${post.title}</h3>
             <p class="text-gray-500 dark:text-gray-300 text-sm mb-2">${formatDate(post.date)}</p>

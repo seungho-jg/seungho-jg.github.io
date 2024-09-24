@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#1F2937">
-    <title>about</title>
+    <title>블로그 포스팅</title>
     <link href="./css/output.css" rel="stylesheet">
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -23,9 +23,19 @@
     <div id="navbar"></div>
 
     <main class="container mx-auto px-4 py-8 max-w-screen-md">
-        <h1 class="mt-16">안녕하세요</h1>
-        <h5>!!</h5>
+        <section>
+            <h2 class="text-2xl font-semibold mb-4 mt-16">키워드</h2>
+            <div id="keywords" class="flex flex-wrap gap-3">
+                <!-- 키워드가 여기에 동적으로 로드됩니다 (전체, 알고리즘, 파이썬...) -->
+            </div>
+            <div class="mt-5 mb-3 h-0.5 bg-stone-300 dark:bg-slate-400 rounded-full"></div>
+            <h2 id="posting-counter" class="mb-8">총 0개의 게시물이 있어요</h2>
+            <div id="posts" class="grid gap-4 grid-cols-1 md:grid-cols-2">
+                <!-- 포스팅 리스트가 여기에 표시됩니다 -->
+            </div>
+        </section>
     </main>
-    <script src="/js/main.js"></script> 
+    <script src="./js/main.js"></script> 
+    <script src="./js/search.js"></script>
 </body>
 </html>
