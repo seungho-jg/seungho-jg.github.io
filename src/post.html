@@ -45,11 +45,29 @@
             <div class="mt-2 mb-8 h-0.5 bg-stone-300 dark:bg-slate-400 rounded-full"></div>
             <div id="post-content" class="prose dark:prose-invert max-w-none markdown-body"></div>
         </article>
+        <div class="flex flex-row mt-7 gap-2 max-w-3xl mx-auto">
+            <div class="text-sm font-light dark:bg-slate-500 bg-stone-300 px-2 py-0.5 rounded-full ">♥︎  <span id="like" class="ml-1">10</span> </div>
+            <div class="text-sm font-light dark:bg-slate-500 bg-stone-300 px-2 py-0.5 rounded-full ">👀  <span id="view" class="ml-1">200</span></div>
+        </div>
+        <div class="max-w-3xl mx-auto dark:bg-slate-500 bg-stone-300 rounded-md mt-2 p-2">
+            <p class="font-semibold">댓글 <span class="font-light text-md">1000</span></p>
+            <div id="comments" class="flex flex-col"></div>
+            <div class="flex flex-row p-3 gap-2 justify-between">
+                <div id="profile" class="size-8 bg-white rounded-full"></div>
+                <input id="name" placeholder="name" class="pl-3 w-1/5 bg-white rounded-full"></input>
+                <input id="comment" placeholder="댓글 입력..." class="pl-3 md:w-60 bg-white flex-grow rounded-full"></input>
+                <button id="submit-comment" class="bg-stone-400 dark:bg-slate-400 rounded-full px-4 focus:scale-95">확인</button>
+            </div>
+        </div>
+
         <div id="post-navigation" class="max-w-3xl mx-auto mt-8">
             <h2 class="text-xl font-bold mb-4">다른 글 보기</h2>
             <div id="post-list" class="flex flex-col w-full"></div>
         </div>
     </main>
+    <footer class="w-full">
+        <p class="text-center text-gray-500 font-normal">&copy; 2024 seungho-dev-blog. All Rights Reserved.</p>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -136,5 +154,52 @@
         }
     </script>
     <script src="./js/main.js"></script>
+    <script>
+        const commentsList = document.getElementById('comments');
+        const nameInput = document.getElementById('name');
+        const mentInput = document.getElementById('ment');
+        const submitButton = document.getElementById('submit-comment');
+        const commentCount = document.getElementById('comment-count');
+
+        // // 가짜 댓글 데이터
+        // const fakeComments = [
+        //     { name: '김철수', content: '정말 좋은 글이네요!', likes: 5 },
+        //     { name: '이영희', content: '저도 같은 생각입니다.', likes: 3 },
+        //     { name: '박민준', content: '흥미로운 주제예요.', likes: 7 },
+        //     { name: '정수연', content: '더 자세한 설명 부탁드려요.', likes: 2 },
+        //     { name: '강지훈', content: '다음 글도 기대되네요!', likes: 4 },
+        // ];
+
+        function renderComments() {
+            commentsList.innerHTML = '';
+            fakeComments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'bg-white dark:bg-slate-600 rounded-lg p-3 shadow';
+                commentElement.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold">${comment.name}</span>
+                        <span class="text-sm text-gray-500">♥︎ ${comment.likes}</span>
+                    </div>
+                    <p class="mt-1">${comment.content}</p>
+                `;
+                commentsList.appendChild(commentElement);
+            });
+            commentCount.textContent = fakeComments.length;
+        }
+
+        submitButton.addEventListener('click', () => {
+            const name = nameInput.value.trim();
+            const content = mentInput.value.trim();
+            if (name && content) {
+                fakeComments.push({ name, content, likes: 0 });
+                renderComments();
+                nameInput.value = '';
+                mentInput.value = '';
+            }
+        });
+
+        // 초기 렌더링
+        renderComments();
+    </script>
 </body>
 </html>
