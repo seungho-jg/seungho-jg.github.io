@@ -57,18 +57,13 @@
         <div class="max-w-3xl mx-auto dark:bg-slate-500 bg-stone-300 rounded-md mt-2 p-2">
             <p class="font-semibold">댓글 <span id="comment-count" class="font-light text-md"></span></p>
             <div  id="comments" class="flex flex-col gap-2 max-h-[300px] overflow-scroll"></div>
-            <div class="group peer flex flex-row p-2 mt-3 gap-2 justify-between items-center">
-                <div id="profile" class="cursor-pointer size-8 rounded-full group-focus-within:hidden sm:!block">
+            <div class="flex flex-row p-2 mt-3 gap-2 justify-between items-center">
+                <div id="profile" class="cursor-pointer size-8 rounded-full">
                     <img id="profile-image" src="../assets/img/profile/avatar00.png" alt="프로필 이미지" class="rounded-full w-8 h-8">
                 </div>
                 <input id="name" placeholder="name" class="pl-3 w-1/5 bg-white rounded-full h-8 text-black">
                 <input id="comment" placeholder="댓글 입력..." class="peer pl-3 w-1/2 h-8 bg-white flex-grow rounded-full text-black">
-                <button id="submit-comment" class="bg-stone-400 px-1 dark:bg-slate-400 flex-grow-0 rounded-full focus:scale-95 text-xs sm:text-sm
-                    hidden group-focus-within:block sm:block
-                    group-focus-within:translate-x-0 h-8
-                    transition-all">
-                    전송
-                </button>
+                <button id="submit-comment" class="bg-stone-400 px-1 dark:bg-slate-400 flex-grow-0 rounded-full focus:scale-95 text-xs sm:text-sm h-8">전송</button>
             </div>
         </div>
 
