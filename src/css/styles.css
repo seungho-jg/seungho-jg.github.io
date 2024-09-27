@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* highlight.js 스타일 가져오기 */
+@import 'highlight.js/styles/atom-one-dark.css';
+
 .custom-gradient {
     @apply bg-gradient-to-bl from-indigo-500 via-purple-500 to-pink-500 transition-colors shadow-inner
 }

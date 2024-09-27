@@ -1709,6 +1709,8 @@ video {
   transition-duration: 150ms !important;
 }
 
+/* highlight.js 스타일 가져오기 */
+
 .custom-gradient {
   background-image: linear-gradient(to bottom left, var(--tw-gradient-stops));
   --tw-gradient-from: #6366f1 var(--tw-gradient-from-position);
