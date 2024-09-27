@@ -1,3 +1,13 @@
+import 'highlight.js/styles/atom-one-dark.css';
+import javascript from 'highlight.js/lib/languages/javascript';
+import python from 'highlight.js/lib/languages/python';
+import hljs from 'highlight.js/lib/core';
+
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('python', python);
+
+// 필요한 언어만 로드
+
 document.addEventListener('DOMContentLoaded', function() {
     const url = new URLSearchParams(window.location.search);
     const postId = url.get('id');
@@ -26,10 +36,27 @@ async function fetchAndRenderPost(postId, yearMonth) {
 
         // 네비게이션 포스트 렌더링
         renderNavigationPosts(posts, currentPostIndex);
+        handleCopy();
     } catch (error) {
         console.error('Error fetching or processing post:', error);
         document.getElementById('post-content').textContent = 'Error loading post content: ' + error.message;
     }
+}
+function handleCopy() {
+    document.querySelectorAll('.copy-btn').forEach((button) => {
+        button.addEventListener('click', () => {
+            // 해당 코드블럭 찾기 (copy-btn 버튼의 부모 요소 기준으로 코드블럭 찾기)
+            const codeBlock = button.closest('.code-header').nextElementSibling.querySelector('code');
+            
+            // 코드 텍스트를 클립보드로 복사
+            const codeText = codeBlock.textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+                alert('코드가 복사되었습니다!');
+            }).catch(err => {
+                console.error('복사 실패:', err);
+            });
+        });
+    });
 }
 
 function renderCurrentPost(post) {
@@ -45,6 +72,25 @@ function renderCurrentPost(post) {
         if (typeof SimpleMDE !== 'undefined') {
             const renderedHTML = SimpleMDE.prototype.markdown(post.content);
             document.getElementById('post-content').innerHTML = renderedHTML;
+
+            // // 하이라이트 적용
+            document.querySelectorAll('pre code').forEach((block) => {
+                const codeHeader = `
+                    <div class="code-header">
+                    <div class="left-btns">
+                    <span class="red btn"></span>
+                    <span class="yellow btn"></span>
+                    <span class="green btn"></span>
+                    </div>
+                    <button class="copy-btn">Copy</button>
+                    </div>`;
+                // block 요소의 부모에 헤더추가
+                const preElement = block.parentElement;
+                preElement.insertAdjacentHTML('beforebegin', codeHeader)
+
+                // 하이라이팅 적용
+                hljs.highlightElement(block);
+            });
         } else {
             console.error('SimpleMDE is not available');
             document.getElementById('post-content').textContent = post.content;
