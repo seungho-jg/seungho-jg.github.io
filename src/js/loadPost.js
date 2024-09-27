@@ -1,17 +1,8 @@
-import 'highlight.js/styles/atom-one-dark.css';
-import javascript from 'highlight.js/lib/languages/javascript';
-import python from 'highlight.js/lib/languages/python';
-import hljs from 'highlight.js/lib/core';
-
-hljs.registerLanguage('javascript', javascript);
-hljs.registerLanguage('python', python);
-
-// 필요한 언어만 로드
-
 document.addEventListener('DOMContentLoaded', function() {
     const url = new URLSearchParams(window.location.search);
     const postId = url.get('id');
     const yearMonth = url.get('ym');
+
     
     fetchAndRenderPost(postId, yearMonth);
 });
