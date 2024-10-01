@@ -10,15 +10,14 @@ async function fetchPosts() {
         const response = await fetch('https://seungho-jg.github.io/posts/metadata.json');
         if (!response.ok) throw new Error('Failed to fetch posts');
         postText = await response.text();
-        console.log(postText)
         posts = JSON.parse(postText);
-        console.log('posts: ',posts)
+        // console.log('posts: ',posts)
         allTags = [...new Set(posts.flatMap(post => post.tags))];
         renderTagButtons();
         filterPosts();
     } catch (error) {
         console.error('Error fetching posts:', error);
-        postsContainer.innerHTML = '<p class="text-red-500">Failed to load posts. Please try again later.</p>';
+        postsContainer.innerHTML = '<p class="text-red-500">게시물을 가져오는데 실패했습니다.</p>';
     }
 }
 
